@@ -26,7 +26,7 @@ python -m torch.distributed.launch \
   --batch_size 25 \
   --metric_epochs 1000 \
   --batch_size_metricL 250 \
-  --bank_size 1000 \
+  --bank_size 0 \
   --embed_dim 128 \
   --modes 28 \
   --width 64 \

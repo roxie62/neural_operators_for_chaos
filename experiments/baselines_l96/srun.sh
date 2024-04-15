@@ -28,3 +28,4 @@ python -m torch.distributed.launch \
   --width 64 \
   --x_len 100 \
   --noisy_scale 0.3 \
+  --train_operator \

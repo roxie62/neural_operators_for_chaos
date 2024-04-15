@@ -152,12 +152,8 @@ class TestingData(Dataset):
 
 
 if __name__ == '__main__':
-    noisy_scale = 0.3
     train_size = 2000
     crop_T = 2000
-    training_data_noisy = TrainingData(crop_T = crop_T, convert_to_pil = True, noisy_scale= noisy_scale, train_size = train_size)
-    validation_data_noisy = TrainingData(crop_T = crop_T, convert_to_pil = True, noisy_scale= noisy_scale, train_size = train_size, validation=True)
-    testing_data = TestingData(crop_T = crop_T, convert_to_pil = True, noisy_scale = 0)
     def save_data_with_pil(dataset):
         nan_list = []
         print(dataset.data_path)
@@ -180,6 +176,11 @@ if __name__ == '__main__':
                 img_data.save('{}/{:06d}_noise_{:.2f}.tiff'.format(dataset.data_path, idx, noisy_scale))
         if save_pil:
             torch.save(np.array(nan_list), dataset.data_path + '/nan_list.pth')
+    noisy_scale = 0.3
+    training_data_noisy = TrainingData(crop_T = crop_T, convert_to_pil = True, noisy_scale= noisy_scale, train_size = train_size)
+    validation_data_noisy = TrainingData(crop_T = crop_T, convert_to_pil = True, noisy_scale= noisy_scale, train_size = train_size, validation=True)
     save_data_with_pil(training_data_noisy)
     save_data_with_pil(validation_data_noisy)
+    noisy_scale = 0
+    testing_data = TestingData(crop_T = crop_T, convert_to_pil = True, noisy_scale = 0)
     save_data_with_pil(testing_data)

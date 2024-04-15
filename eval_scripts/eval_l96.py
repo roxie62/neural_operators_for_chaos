@@ -38,12 +38,13 @@ def eval_l96(operator, args, noisy_scale = 0, x_len = 100, calculate_l2 = True, 
     slow_stats_list = []
     l2_lploss_list, dist_spectrum = [], []
 
-    eval_size = 200
     crop_T = 2000
     if noisy_scale == 0:
+        eval_size = 200
         TestingData_Initial = TestingData(crop_T, noisy_scale = args.noisy_scale, convert_to_pil = False)
         TestingData_eval = TestingData(crop_T, noisy_scale = noisy_scale, convert_to_pil = False)
     else:
+        eval_size = 100
         TestingData_Initial = TrainingData(crop_T, noisy_scale = args.noisy_scale, convert_to_pil = False, validation = True, train_operator = True, train_size = eval_size)
         TestingData_eval = TrainingData(crop_T, noisy_scale = noisy_scale, convert_to_pil = False, validation = True, train_operator = True, train_size = eval_size)
 
@@ -56,12 +57,7 @@ def eval_l96(operator, args, noisy_scale = 0, x_len = 100, calculate_l2 = True, 
     params_initial, data_initial = params_initial[:eval_size], data_initial[:eval_size].squeeze()
     params_eval, data_eval = params_eval[:eval_size], data_eval[:eval_size].squeeze()
 
-
-    if x_len == 100:
-        x_0_start_list = [100]
-    else:
-        x_0_start_list = [300]
-
+    x_0_start_list = [300]
     for x_0_start in tqdm(x_0_start_list):
         x_len = x_len
         x_end = x_0_start + x_len
@@ -92,7 +88,10 @@ def eval_l96(operator, args, noisy_scale = 0, x_len = 100, calculate_l2 = True, 
 
             for idata in range(eval_size):
                 out = out_list[idata]
-                x = x_list[idata]
+                try:
+                    x = x_list[idata]
+                except:
+                    pdb.set_trace()
                 assert out.shape == x.shape
                 assert out.shape[0] == x_len
                 spec_truth = spectrum(x)

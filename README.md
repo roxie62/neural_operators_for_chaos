@@ -1,5 +1,3 @@
-## neural_operators_for_chaos
-
 <p align="center">
   <img src="https://github.com/roxie62/neural_operators_for_chaos/blob/main/plots/diagram_emulator.png" width="700">
 </p>
