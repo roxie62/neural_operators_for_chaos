@@ -95,8 +95,8 @@ def get_all_data(dataset, num_workers=30, shuffle=False):
     return all_data
 
 noisy_scale = 0.3
-TestingData_Initial = TestingData(200, noisy_scale = noisy_scale, convert_to_pil = False, dt10 = True)
-TestingData_eval = TestingData(200, noisy_scale = 0, convert_to_pil = False, dt10 = True)
+TestingData_Initial = TestingData(200, noisy_scale = noisy_scale, convert_to_pil = False)
+TestingData_eval = TestingData(200, noisy_scale = 0, convert_to_pil = False)
 all_data_initial = get_all_data(TestingData_Initial)
 all_data_eval = get_all_data(TestingData_eval)
 params_initial, data_initial = all_data_initial[0], all_data_initial[1]
@@ -125,9 +125,9 @@ def step(states, dt):
 
 F = 18
 N = 60
-t_start = 1000
+t_start = 500
 LE_result_list = []
-# LE_result_list = torch.load(f'{t_start}_LE_result_{noisy_scale}.pth')
+# LE_result_list = torch.load(f'output_folder/LE_results/{t_start}_LE_result_{noisy_scale}.pth')
 for i_data in range(len(LE_result_list), eval_size):
     print(i_data)
     F = params_eval[i_data].cpu().data.numpy().item()
@@ -135,4 +135,4 @@ for i_data in range(len(LE_result_list), eval_size):
     LE_result = lyapunov(step, 1000, u0, delta_t=0.1, Ttr=10, show_progress=True)
     print(F, LE_result)
     LE_result_list.append([F, LE_result])
-    torch.save(LE_result_list, f'{t_start}_LE_result_{noisy_scale}.pth')
+    torch.save(LE_result_list, f'output_folder/LE_results/{t_start}_LE_result_{noisy_scale}.pth')

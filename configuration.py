@@ -13,17 +13,14 @@ parser.add_argument('--calculate_metric', default = 0, type = int)
 parser.add_argument('--lambda_contra', default = 0, type = float)
 
 parser.add_argument('--epochs', default = 501, type = int)
-parser.add_argument('--perceptual_layers', default = 0, type = int)
 parser.add_argument('--batch_size', default = 100, type = int)
 parser.add_argument('--batch_size_metricL', default = 100, type = int)
 parser.add_argument('--learning_rate', default = 1e-3, type = float)
-parser.add_argument('--baseline', action='store_true') # set it true when you load baseline model, i.e. only with mse
 
 ##################################################################
 parser.add_argument('--l96', action='store_true')
 parser.add_argument('--kse', action='store_true')
 parser.add_argument('--subsample', action='store_true')
-parser.add_argument('--load_saved_operator', action='store_true')
 parser.add_argument('--ranked', action='store_true')
 parser.add_argument('--evaluate', action='store_true')
 parser.add_argument('--with_geomloss', default = 0, type = int)
