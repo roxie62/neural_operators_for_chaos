@@ -32,5 +32,4 @@ python -m torch.distributed.launch \
   --blur 0.02 \
   --lambda_geomloss 3 \
   --noisy_scale 0.3 \
-  --eval_LE \
-  #--train_operator \
+  --train_operator \

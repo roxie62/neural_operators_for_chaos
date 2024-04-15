@@ -21,10 +21,15 @@ export MASTER_ADDR=$master_addr
 echo "MASTER_ADDR="$MASTER_ADDR
 
 python -m torch.distributed.launch \
---nproc_per_node=4 --master_port=${port} scripts/main.py \
+--nproc_per_node=1 --master_port=${port} scripts/main.py \
   --l96 \
   --batch_size 25 \
   --modes 28 \
   --width 64 \
   --x_len 100 \
+  --with_geomloss_kd 0 \
+  --with_geomloss 1 \
+  --blur 0.02 \
+  --lambda_geomloss 3 \
   --noisy_scale 0.3 \
+  --eval_LE \

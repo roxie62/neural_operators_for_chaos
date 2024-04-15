@@ -33,6 +33,5 @@ python -m torch.distributed.launch \
   --lambda_contra 0.8 \
   --x_len 100 \
   --noisy_scale 0.3 \
-  --eval_LE \
   --train_operator \
   --train_metric \
