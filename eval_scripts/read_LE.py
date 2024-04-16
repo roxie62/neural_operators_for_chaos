@@ -15,7 +15,7 @@ if noise_scale == 0.3:
     # ot = f'{LE_folder}/l96_noCL_xl_100_lmOT_3.0_OT_3.pth'
     ot = f'{LE_folder}/l96_noCL_xl_100_lmOT_3.0.pth'
     baseline = f'{LE_folder}/l96_noCL_xl_100.pth'
-truth = f'{LE_folder}/correct_500_LE_result_{noise_scale}.pth'
+truth = f'{LE_folder}/500_LE_result_{noise_scale}.pth'
 
 baseline = torch.load(baseline)
 cl = torch.load(cl)

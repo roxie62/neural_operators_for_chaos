@@ -47,7 +47,7 @@ To run contrastive learning (CL) method for Lorenz 96 data, run:
 bash experiments/CL_l96/srun.sh
 ```
 The hyperparameters of the OT method are:
-- Memory bank size, which should be divided by the current `batch_size_metricL`: `--bank_size 1000`.
+- Memory bank size, which should be divisible by the current `batch_size_metricL`: `--bank_size 1000`.
 - Temperature value for controlling the radius of the hypersphere feature space: `--T_metricL_traj_alone 0.3`.
 
 
