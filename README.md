@@ -15,11 +15,11 @@ This is the implementation for the NeurIPS 2023 paper "[Training neural operator
 ```
 
 ### Prepare the training data
-To generate the Lorenz 96 data, in the `l96_data` folder, run:
+To generate the Lorenz 96 data in the `l96_data` folder, run:
 ```
 python generate_data.py
 ```
-And then to create noisy observations and speed up the loading process during the training, in the parent folder, run:
+Then to create noisy observations and speed up the loading process during the training, in the parent folder, run:
 ```
 python dataloader/dataloader_l96.py
 ```
@@ -29,25 +29,25 @@ python dataloader/dataloader_l96.py
 This implementation supports DistributedDataParallel training: The default configuration uses 4 GPUs.
 The default algorithm used to solve the optimal transport problem is [Sinkhorn divergence](https://www.kernel-operations.io/geomloss/).
 
-To run optimal transport (OT) method for Lorenz 96 data, run:
+To train the neural operator with the optimal transport (OT) method for Lorenz 96 data, run:
 ```
 bash experiments/OT_l96/srun.sh
 ```
 The hyperparameters of the OT method are:
 - Weights of the OT loss: `--lambda_geomloss 3`.
 - Regularization value in the Sinkhorn algorithm, where smaller regularization usually leads to high accuracy while slowing the training: `--blur 0.02`.
-- Controlling the physical knowledge you want to use during the training, set this to be larger than 0 if you only have partial knowledge of the system, `--with_geomloss_kd 0`
+- Controlling the physical knowledge you want to use during the training, set this to be larger than 0 if you only have partial knowledge of the system, `--with_geomloss_kd 0`.
 
 
 ### Contrastive feature learning method
 This implementation supports DistributedDataParallel training: The default configuration uses 4 GPUs.
 
-To run contrastive learning (CL) method for Lorenz 96 data, run:
+To train the neural operator with the contrastive learning (CL) method for Lorenz 96 data, run:
 ```
 bash experiments/CL_l96/srun.sh
 ```
 The hyperparameters of the OT method are:
-- Memory bank size, which should be divisible by the current `batch_size_metricL`: `--bank_size 1000`.
+- Memory bank size, which should be divisible by the current GPU_number times `batch_size_metricL`: `--bank_size 1000`.
 - Temperature value for controlling the radius of the hypersphere feature space: `--T_metricL_traj_alone 0.3`.
 
 
@@ -58,7 +58,7 @@ bash experiments/OT_l96/eval.sh
 bash experiments/OT_l96/eval_partial.sh
 bash experiments/CL_l96/eval.sh
 ```
-Turning on the `--eval_LE` command means that we are calculating the leading Lyapunov exponent (LLE) for the trained neural operator, which takes ~1 hour for 200 test instances.
+Turning on the `--eval_LE` command means we are calculating the leading Lyapunov exponent (LLE) for the trained neural operator, which takes ~2 hours for 200 test instances.
 If you want to calculate the ground truth LLE values for the data, run:
 ```
 python eval_scripts/LE_l96.py
