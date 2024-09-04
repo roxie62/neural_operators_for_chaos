@@ -18,7 +18,7 @@ parser.add_argument('--num_of_sample', default = 500, type = int)
 args = parser.parse_args()
 
 ############################### generate the training data######################
-generate_training_data = False
+generate_training_data = True
 data_folder, random_index = 'F_2000_dt10', 0
 args.num_of_sample = 2000
 os.makedirs(data_folder, exist_ok = True)
