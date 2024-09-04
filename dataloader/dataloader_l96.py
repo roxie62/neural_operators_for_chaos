@@ -179,8 +179,10 @@ if __name__ == '__main__':
     noisy_scale = 0.3
     training_data_noisy = TrainingData(crop_T = crop_T, convert_to_pil = True, noisy_scale= noisy_scale, train_size = train_size)
     validation_data_noisy = TrainingData(crop_T = crop_T, convert_to_pil = True, noisy_scale= noisy_scale, train_size = train_size, validation=True)
+    testing_data_noisy = TestingData(crop_T = crop_T, convert_to_pil = True, noisy_scale = 0)
     save_data_with_pil(training_data_noisy)
     save_data_with_pil(validation_data_noisy)
+    save_data_with_pil(testing_data_noisy)
     noisy_scale = 0
     testing_data = TestingData(crop_T = crop_T, convert_to_pil = True, noisy_scale = 0)
     save_data_with_pil(testing_data)
