@@ -5,7 +5,7 @@
 This is the implementation for the NeurIPS 2023 paper "[Training neural operators to preserve invariant measures of chaotic attractors](https://openreview.net/pdf?id=8xx0pyMOW1)".
 
 ```
-@article{jiang2024training,
+@article{jiang2023training,
   title={Training neural operators to preserve invariant measures of chaotic attractors},
   author={Jiang, Ruoxi and Lu, Peter Y and Orlova, Elena and Willett, Rebecca},
   journal={Advances in Neural Information Processing Systems},
