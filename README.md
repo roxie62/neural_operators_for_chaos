@@ -9,7 +9,6 @@ This is the implementation for the NeurIPS 2023 paper "[Training neural operator
   title={Training neural operators to preserve invariant measures of chaotic attractors},
   author={Jiang, Ruoxi and Lu, Peter Y and Orlova, Elena and Willett, Rebecca},
   journal={Advances in Neural Information Processing Systems},
-  volume={36},
   year={2023}
 }
 ```
