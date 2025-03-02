@@ -39,8 +39,7 @@ The hyperparameters of the OT method are:
 
 
 ### Contrastive feature learning method
-This implementation supports DistributedDataParallel training: The default configuration uses 4 GPUs. 
-If you are looking to modify the codebase on your own example, you might want to enable running on a single GPU in the code development phase. And this can be done by changing the command ```--nproc_per_node=1``` in the bash file, which means the number of GPUs each process operates on is 1 instead of 4.
+This implementation supports DistributedDataParallel training: The default configuration uses 4 GPUs.
 
 To train the neural operator with the contrastive learning (CL) method for Lorenz 96 data, run:
 ```
@@ -50,6 +49,7 @@ The hyperparameters of the OT method are:
 - Memory bank size, which should be divisible by the current GPU_number times `batch_size_metricL`: `--bank_size 1000`.
 - Temperature value for controlling the radius of the hypersphere feature space: `--T_metricL_traj_alone 0.3`.
 
+If you are looking to modify the codebase on your own example, you might want to enable running on a single GPU in the code development phase. And this can be done by changing the command ```--nproc_per_node=1``` in the bash file, which means the number of GPUs each process operates on is 1 instead of 4.
 
 ### Evaluation
 We only require 1 GPU for the evaluation. To run the evaluation for each method, run:
