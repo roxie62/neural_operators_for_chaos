@@ -47,8 +47,10 @@ class CL:
     def train_metric_net(self, train_vis_pth = '', saved_pth_contra = ''):
         traj_top1_list, loss_list = [], []
         train_acc, val_acc = 0, 0
-        ep_real = 0 ## As we use infinite dataloader for fast training, we use ep_real to count the real epochs number.
+        ep_real = 0 ## As we use an infinite dataloader for fast training, we use ep_real to count the real epochs number.
         iter_real = 0
+        ## This script uses infinite datalaoder, which has an "augmented" dataset that included #epochs times larger dataset.
+        ## So we manually set the metric_epochs_train here because one epoch will go through the dataset #epochs times.
         metric_epochs_train = 1
         self.metric_net.train()
 
