@@ -31,7 +31,6 @@ class CL:
         self.train_loader_metric = train_loader_metric
         self.train_sampler = train_sampler
         self.gpu = args.gpu
-        self.train_loader_metric = train_loader_metric
         self.lr_metric = args.lr_metric
         self.T_metricL_traj_alone = args.T_metricL_traj_alone
         self.max_tau_metricL = args.max_tau_metricL
@@ -39,9 +38,11 @@ class CL:
         self.distributed = args.distributed
         self.args = args
         self.batch_size_metricL = args.batch_size_metricL
+        ## Normally, the dataloader at every epoch should give you the whole training data once.
+        ## Here, we create an infinite dataloader. And the ep_ratio here corresponds to the number of 
+        ## iterations a normal dataloader usually requires.
         self.ep_ratio = int(args.training_size / (args.batch_size_metricL * args.world_size))
         self.val_loader_metric = val_loader_metric
-        self.args = args
 
     def train_metric_net(self, train_vis_pth = '', saved_pth_contra = ''):
         traj_top1_list, loss_list = [], []
@@ -52,7 +53,7 @@ class CL:
         self.metric_net.train()
 
         for ep in tqdm(np.arange(metric_epochs_train)):
-            for param, x, y in tqdm(self.train_loader_metric):
+            for param, x, y in tqdm(self.train_loader_metric): ## x, y positive samples
                 if ep_real % 1 == 0:
                     lr_ = adjust_learning_rate_cos(self.lr_metric, self.optimizer_metric, ep_real, self.metric_epochs, self.args)
                     T_metricL_traj_alone = adjust_tau_metricL(self.T_metricL_traj_alone, ep_real, self.metric_epochs, epochs = 100, max_tau_metricL = self.max_tau_metricL)
