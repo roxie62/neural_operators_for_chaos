@@ -39,8 +39,8 @@ class CL:
         self.args = args
         self.batch_size_metricL = args.batch_size_metricL
         ## Normally, the dataloader at every epoch should give you the whole training data once.
-        ## Here, we create an infinite dataloader. And the ep_ratio here corresponds to the number of 
-        ## iterations a normal dataloader usually requires.
+        ## Here, we create an infinite dataloader. And the ep_ratio here corresponds to the 1/(number of 
+        ## iterations a normal dataloader usually requires).
         self.ep_ratio = int(args.training_size / (args.batch_size_metricL * args.world_size))
         self.val_loader_metric = val_loader_metric
 
