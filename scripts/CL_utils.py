@@ -59,8 +59,11 @@ class CL:
                 if ep_real % 1 == 0:
                     lr_ = adjust_learning_rate_cos(self.lr_metric, self.optimizer_metric, ep_real, self.metric_epochs, self.args)
                     T_metricL_traj_alone = adjust_tau_metricL(self.T_metricL_traj_alone, ep_real, self.metric_epochs, epochs = 100, max_tau_metricL = self.max_tau_metricL)
+                
+                ## compute the features of the anchor and positive samples
                 cat_embed = self.metric_net.forward(torch.cat([x, y]).to(self.gpu))
                 anchor_embed, pos_anchor_embed = cat_embed[:self.batch_size_metricL, :], cat_embed[self.batch_size_metricL:, :]
+                
                 if self.bank_size > 0:
                     traj_embed_queue = self.metric_net.module.traj_queue_embed.detach().clone()
                     pos_anchor_embed_ = torch.cat([pos_anchor_embed, traj_embed_queue.T], dim = 0)
